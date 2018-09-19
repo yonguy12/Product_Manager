@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-product',
@@ -13,18 +13,20 @@ export class EditProductComponent implements OnInit {
   message: any = {"exist": false, "message": ""}
 
 
-  constructor(private _ProductService: ProductService, private route: ActivatedRoute) { }
+  constructor(private _ProductService: ProductService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.updateProduct = { title: "", price: "", url: "" }
+    this.getProduct();
   }
 
   editProduct(id) {
     this._ProductService.editProduct(this.updateProduct._id, this.updateProduct).subscribe(data => {
       console.log("this is editting", data);
     })
+    this.router.navigate(['/products']);
   }
-  getAuthor() {
+  getProduct() {
     this.route.params.subscribe(params => {
       this.id = params
       console.log(this.id);
@@ -32,7 +34,7 @@ export class EditProductComponent implements OnInit {
     this._ProductService.getProduct(this.id).subscribe(data=> {
       console.log("this is data in get product", data);
       this.updateProduct = data
-      this.updateProduct = this.updateProduct[0]
+      // this.updateProduct = this.updateProduct[0]
     })
   }
 }

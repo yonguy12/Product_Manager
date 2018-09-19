@@ -26,7 +26,7 @@ export class ProductService {
     return this._http.patch('api/products/' +id, updateProduct)
   }
   getProduct(id) {
-    console.log("serving get product")
-    return this._http.get('/api/authors/' + id.id)
+    console.log("serving get product", id)
+    return this._http.get('/api/products/' + id.id)
   }
 }
