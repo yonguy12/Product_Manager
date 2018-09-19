@@ -1,0 +1,37 @@
+<div class="container"> 
+    <h1>Edit a product</h1>
+    <form (submit)="editProduct()">
+      <ul>
+        <li class="text-danger" *ngIf="message.exist">{{message.message}}</li>
+      </ul>
+      <label>Title:</label>
+      <input 
+        required 
+        minlength="4" 
+        maxlength="24" 
+        #title="ngModel" 
+        [(ngModel)] = "updateProduct.title"
+        class="form-control" 
+        type="text" 
+        name="title">
+        <small *ngIf="title.touched && title.invalid" class="form-text text-muted">Title is required and must be 4-24 characters long!</small>
+      <label>Price:</label>
+      <input
+        required
+        #price = "ngModel"
+        [(ngModel)] = "updateProduct.price"
+        class="form-control" 
+        type="text" 
+        name="price">
+        <small *ngIf="price.touched && price.invalid" class="form-text text-muted">Price is required!</small>
+      <label>Url:</label>
+      <input 
+        [(ngModel)] = "updateProduct.url"
+        class="form-control" 
+        type="text" 
+        name="url">
+        <button type="submit" class="btn btn-sm btn-outline-secondary mt-3">Update</button>
+    </form>
+  </div> 
+  
+  <!-- *ngIf="price.valid && title.valid" -->
